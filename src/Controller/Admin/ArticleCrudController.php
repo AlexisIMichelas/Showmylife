@@ -10,6 +10,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -23,6 +25,10 @@ class ArticleCrudController extends AbstractCrudController
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
             TextField::new('description'),
+            TextField::new('posterFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
+            ImageField::new ('poster')
+                ->setBasePath('uploads/images/posters/') // Définir le chemin de base pour l'affichage de l'image
+                ->setUploadDir('public/uploads/images/posters/'),
             AssociationField::new('category')
                 ->setFormTypeOptions([
                     'query_builder' => function (CategoryRepository $categoryRepository) {

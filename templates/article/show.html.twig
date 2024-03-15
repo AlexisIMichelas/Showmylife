@@ -10,6 +10,11 @@
     <ul>
         {% for article in category.articles %}
             <li>
+            
+            {% if article.poster %}
+        <img src="{{ asset('uploads/images/posters/' ~ article.poster) }}" alt="Photo de l'article">
+    {% endif %}
+
                 <p>{{ article.description }}</p>
             </li>
         {% endfor %}
