@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\ArticleRepository;
@@ -44,6 +46,14 @@ class Article
         mimeTypes: ['image/jpeg', 'image/png', 'image/webp'],
     )]
     public ?File $posterFile = null;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class)]
+    public Collection $comment;
+
+    public function __construct()
+    {
+        $this->comment = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -107,5 +117,35 @@ class Article
     }
 
     return $this;
+  }
+
+  /**
+   * @return Collection<int, Comment>
+   */
+  public function getComment(): Collection
+  {
+      return $this->comment;
+  }
+
+  public function addComment(Comment $comment): static
+  {
+      if (!$this->comment->contains($comment)) {
+          $this->comment->add($comment);
+          $comment->setArticle($this);
+      }
+
+      return $this;
+  }
+
+  public function removeComment(Comment $comment): static
+  {
+      if ($this->comment->removeElement($comment)) {
+          // set the owning side to null (unless already changed)
+          if ($comment->getArticle() === $this) {
+              $comment->setArticle(null);
+          }
+      }
+
+      return $this;
   }
 }

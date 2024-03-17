@@ -1,5 +1,3 @@
-{# templates/article/show_articles.html.twig #}
-
 {% extends 'base.html.twig' %}
 
 {% block title %}{{ article.name }}{% endblock %}
@@ -7,16 +5,26 @@
 {% block body %}
     <h1>{{ article.name }}</h1>
 
-    <ul>
-        {% for article in category.articles %}
-            <li>
-            
-            {% if article.poster %}
+    {% if article.poster %}
         <img src="{{ asset('uploads/images/posters/' ~ article.poster) }}" alt="Photo de l'article">
     {% endif %}
 
-                <p>{{ article.description }}</p>
-            </li>
-        {% endfor %}
+    <p>{{ article.description }}</p>
+
+    {% if app.user %}
+        {# Formulaire pour ajouter un commentaire si l'utilisateur est connecté #}
+        {{ form_start(commentForm) }}
+        {{ form_row(commentForm.comment) }}
+        <button type="submit">Envoyer</button>
+        {{ form_end(commentForm) }}
+    {% else %}
+        <p>Connectez-vous pour laisser un commentaire.</p>
+    {% endif %}
+
+    <h2>Commentaires</h2>
+    <ul>
+{% for comment in article.getComment() %}
+    <li>{{ comment.comment }} - {{ comment.author.name }}</li>
+{% endfor %}
     </ul>
 {% endblock %}
