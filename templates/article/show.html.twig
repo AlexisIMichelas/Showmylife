@@ -1,30 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ article.name }}{% endblock %}
+{% block title %}
+    {{ article.name }}
+{% endblock %}
 
 {% block body %}
-    <h1>{{ article.name }}</h1>
+<div class="container mt-5">
+    <div class="row justify-content-center align-items-center"> <!-- Centrer horizontalement et verticalement -->
+        <div class="col-md-8 text-center">
+            <h1 class="text-white">{{ article.name }}</h1>
 
-    {% if article.poster %}
-        <img src="{{ asset('uploads/images/posters/' ~ article.poster) }}" alt="Photo de l'article">
-    {% endif %}
+            {% if article.poster %}
+                <img src="{{ asset('uploads/images/posters/' ~ article.poster) }}" alt="Photo de l'article" class="img-fluid">
+            {% endif %}
 
-    <p>{{ article.description }}</p>
+            <p class="text-white">{{ article.description }}</p>
 
-    {% if app.user %}
-        {# Formulaire pour ajouter un commentaire si l'utilisateur est connecté #}
-        {{ form_start(commentForm) }}
-        {{ form_row(commentForm.comment) }}
-        <button type="submit">Envoyer</button>
-        {{ form_end(commentForm) }}
-    {% else %}
-        <p>Connectez-vous pour laisser un commentaire.</p>
-    {% endif %}
+            {% if app.user %}
+                <h2 class="text-white">Ajouter un commentaire</h2>
+                {{ form_start(commentForm) }}
+                <div class="form-group">
+                    {# Afficher le champ de commentaire sans label #}
+                    {{ form_row(commentForm.comment, {'label': false, 'attr': {'class': 'form-control', 'placeholder': 'Votre commentaire'}}) }}
+                </div>
+                <div class="d-flex justify-content-end"> <!-- Utiliser une classe d-flex avec justify-content-end -->
+                    <button type="submit" class="btn btn-primary mt-2">Envoyer</button>
+                </div>
+                {{ form_end(commentForm) }}
+            {% else %}
+                <p class="text-white">Connectez-vous pour laisser un commentaire.</p>
+            {% endif %}
+        </div>
+    </div>
 
-    <h2>Commentaires</h2>
-    <ul>
-{% for comment in article.getComment() %}
-    <li>{{ comment.comment }} - {{ comment.author.name }}</li>
-{% endfor %}
-    </ul>
+    <div class="row mt-4 justify-content-center"> 
+        <div class="col-md-8 text-center">
+            <h2 class="text-white">Commentaires</h2> 
+            <ul class="list-group">
+                {% for comment in article.getComment() %}
+                    <li class="list-group-item">{{ comment.comment }} - {{ comment.author.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

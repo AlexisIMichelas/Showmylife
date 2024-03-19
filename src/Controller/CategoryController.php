@@ -13,7 +13,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/category')]
 class CategoryController extends AbstractController
 {
-    #[Route('/', name: 'app_category_show')]
+    #[Route('/', name: 'app_category')]
     public function index(CategoryRepository $categoryRepository, ArticleRepository $articleRepository, Request $request): Response
     {
         $categories = $categoryRepository->findAll();

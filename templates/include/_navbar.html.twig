@@ -1,0 +1,24 @@
+<footer>
+<ul class="footer fixed-bottom navbar-light bg-blue d-flex justify-content-around mb-0 p-2">
+	<li class="nav-item list-unstyled ">
+		<a class="nav-link d-flex align-items-center flex-column-reverse text-white" href="{{ path('app_category') }}">
+			Accueil
+			<i class="fa-solid fa-home fa-2x"></i>
+		</a>
+	</li>
+	<li class="nav-item list-unstyled">
+		<a class="nav-link d-flex align-items-center flex-column-reverse text-white" href=javascript:history.go(-1)>
+			Retour
+			<i class="fa-solid fa-arrow-left-long fa-2x"></i>
+		</a>
+	</li>
+</ul>
+</footer>
+
+{% block javascripts %}
+	<script>
+		function rtn() {
+window.history.back();
+}
+	</script>
+{% endblock %}
