@@ -7666,7 +7666,6 @@
             "time": "2024-03-05T20:31:46+00:00"
         },
         {
-<<<<<<< HEAD
             "name": "symfonycasts/verify-email-bundle",
             "version": "v1.16.2",
             "source": {
@@ -7713,8 +7712,6 @@
             "time": "2024-02-20T10:50:54+00:00"
         },
         {
-=======
->>>>>>> 0d5ef67ed0df06045a4a05afb2cb3d660342e5a7
             "name": "twig/extra-bundle",
             "version": "v3.8.0",
             "source": {
