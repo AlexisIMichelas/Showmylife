@@ -18,11 +18,6 @@
       "DATABASE_URL": "@database_url",
       "MAILER_DSN": "@mailer_dsn",
       "MESSENGER_TRANSPORT_DSN": "@messenger_transport_dsn"
-    },
-    "functions": {
-      "api/**/*.php": {
-        "runtime": "vercel-php@0.7.0"
-      }
     }
   }
   
