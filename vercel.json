@@ -15,9 +15,9 @@
     "env": {
       "APP_ENV": "prod",
       "APP_SECRET": "fb69bba4b06ee6c6e869cc4472afd1df545a8716d83f65646473126a7eb252a2",
-      "DATABASE_URL": "@database_url",
-      "MAILER_DSN": "@mailer_dsn",
-      "MESSENGER_TRANSPORT_DSN": "@messenger_transport_dsn"
+      "DATABASE_URL": "mysql://root:root@127.0.0.1:3306/leodb?serverVersion=8&charset=utf8mb4",
+      "MAILER_DSN": "smtp://5059a76de1c162:1a734241387995@sandbox.smtp.mailtrap.io:2525",
+      "MESSENGER_TRANSPORT_DSN": "doctrine://default?auto_setup=0"
     }
   }
   
