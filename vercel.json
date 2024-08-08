@@ -1,20 +1,28 @@
 {
-    "functions": {
-        "api\/*.php": {
-            "runtime": "vercel-php@0.6.1"
-        }
-    },
-    "env": {
-        "APP_ENV": "prod"
-    },
+    "version": 2,
+    "builds": [
+      {
+        "src": "public/index.php",
+        "use": "@vercel/php"
+      }
+    ],
     "routes": [
-        {
-            "src": "\/(assets)\/(.*)$",
-            "dest": "\\\/api\\\/assets.php?path=\\\/$2"
-        },
-        {
-            "src": "\/(.*)",
-            "dest": "\/api\/index.php"
-        }
-    ]
-}
+      {
+        "src": "/(.*)",
+        "dest": "/public/index.php"
+      }
+    ],
+    "env": {
+      "APP_ENV": "prod",
+      "APP_SECRET": "@app_secret",
+      "DATABASE_URL": "@database_url",
+      "MAILER_DSN": "@mailer_dsn",
+      "MESSENGER_TRANSPORT_DSN": "@messenger_transport_dsn"
+    },
+    "functions": {
+      "api/**/*.php": {
+        "runtime": "vercel-php@0.7.0"
+      }
+    }
+  }
+  
